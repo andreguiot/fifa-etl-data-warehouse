@@ -509,4 +509,55 @@ BEGIN
 		EXIT WHEN NOT FOUND;
 	END LOOP;
 CLOSE posicao;
-END; 
+END;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+-- ÍNDICES DE PERFORMANCE
+-- Justificativa: Acelera as buscas pelo nome do jogador.
+CREATE INDEX idx_players_name ON players(name);
+
+-- Justificativa: Otimiza joins com a tabela de nacionalidades.
+CREATE INDEX idx_players_nationality ON players(code_nationality);
+
+-- Justificativa: Para queries analíticas como "Média de salário por clube".
+CREATE INDEX idx_players_club ON players(code_club_team);
+
+(A pensar sobre a adicição de mais index dependendo das nossas Triggers e Functions) 
+
