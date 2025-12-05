@@ -1,0 +1,619 @@
+	CREATE TABLE jogadores(
+	id integer,
+	name varchar(50),
+	full_name varchar(100),
+	birth_date date,
+	age integer,
+	height_cm float,
+	weight_kgs float,
+        positions varchar(30),
+	nationality varchar(70),
+	overall_rating integer,
+	potential integer,
+	value_euro float,
+	wage_euro float,
+        preferred_foot varchar(10),
+	international_reputation integer,
+	weak_foot integer,
+	skill_moves integer,
+	work_rate varchar(20),  
+	body_type varchar(50),
+	release_clause_euro float,
+	club_team varchar(80),
+	club_rating integer,
+	club_position varchar(50),
+	club_jersey_number integer,
+	club_join_date date,
+	contract_end_year varchar(100),
+	national_team varchar(80),
+	national_rating integer,
+	national_team_position varchar(50),
+	national_jersey_number integer,
+	crossing integer,
+	finishing integer,
+	heading_accuracy integer,
+	short_passing integer,
+	volley integer,
+	dribbling integer,
+	curve integer,
+	freekick_accuracy integer,
+	long_passing integer,
+	ball_control integer,
+	acceleration integer,
+	sprint_speed integer,
+	agility integer,
+	reactions integer,
+	balance integer,
+	shot_power integer,
+	jumping integer,
+	stamina integer,
+	strength integer,
+	long_shots integer,
+	agression integer,
+	interceptation integer,
+	positioning integer,
+	vision integer,
+	penalties integer,
+	composure integer,
+	marking integer,
+	standing_tackle integer,
+	sliding_tackle integer,
+	gk_diving integer,
+	gk_handing integer,
+	gk_kiking integer,
+	gk_positioning integer,
+	gk_reflexes integer,
+	tags varchar(1000),
+	traits varchar(1000),
+	ls varchar(10),
+	st varchar(10),
+	rs varchar(10),
+	lw varchar(10),
+	lf varchar(10),
+	cf varchar(10),
+	rf varchar(10),
+	rw varchar(10),
+	lam varchar(10),
+	cam varchar(10),
+	ram varchar(10),
+	lm varchar(10),
+	lcm varchar(10),
+	cm varchar(10),
+	rcm varchar(10),
+	rm varchar(10),
+	lwb varchar(10),
+	ldm varchar(10),
+	cdm varchar(10),
+	rdm varchar(10),
+	rwb varchar(10),
+	lb varchar(10),
+	lcb varchar(10),
+	cb varchar(10),
+	rcb varchar(10),
+	rb varchar(10),
+	CONSTRAINT "pk_jogadores" PRIMARY KEY(id)
+)
+
+
+
+CREATE TABLE players(
+	id integer,
+	name varchar(50),
+	full_name varchar(100),
+	birth_date date,
+	age integer,
+	height_cm float,
+	weight_kgs float,
+	code_nationality integer,
+	overall_rating integer,
+	potential integer,
+	value_euro float,
+	wage_euro float,
+        preferred_foot varchar(10),
+	international_reputation integer,
+	weak_foot integer,
+	skill_moves integer,
+	work_rate_defense varchar(10),  
+	work_rate_attack varchar(10),
+	body_type varchar(50),
+	release_clause_euro float,
+	code_club_team integer,
+	club_position varchar(50),
+	club_jersey_number integer,
+	club_join_date date,
+	contract_end_year varchar(100),
+	code_national_team integer,
+	national_team_position varchar(50),
+	national_jersey_number integer,
+	crossing integer,
+	finishing integer,
+	heading_accuracy integer,
+	short_passing integer,
+	volley integer,
+	dribbling integer,
+	curve integer,
+	freekick_accuracy integer,
+	long_passing integer,
+	ball_control integer,
+	acceleration integer,
+	sprint_speed integer,
+	agility integer,
+	reactions integer,
+	balance integer,
+	shot_power integer,
+	jumping integer,
+	stamina integer,
+	strength integer,
+	long_shots integer,
+	agression integer,
+	interceptation integer,
+	positioning integer,
+	vision integer,
+	penalties integer,
+	composure integer,
+	marking integer,
+	standing_tackle integer,
+	sliding_tackle integer,
+	gk_diving integer,
+	gk_handing integer,
+	gk_kiking integer,
+	gk_positioning integer,
+	gk_reflexes integer,
+	ls varchar(10),
+	st varchar(10),
+	rs varchar(10),
+	lw varchar(10),
+	lf varchar(10),
+	cf varchar(10),
+	rf varchar(10),
+	rw varchar(10),
+	lam varchar(10),
+	cam varchar(10),
+	ram varchar(10),
+	lm varchar(10),
+	lcm varchar(10),
+	cm varchar(10),
+	rcm varchar(10),
+	rm varchar(10),
+	lwb varchar(10),
+	ldm varchar(10),
+	cdm varchar(10),
+	rdm varchar(10),
+	rwb varchar(10),
+	lb varchar(10),
+	lcb varchar(10),
+	cb varchar(10),
+	rcb varchar(10),
+	rb varchar(10),
+	CONSTRAINT "pk_players" PRIMARY KEY(id)
+)
+
+
+
+CREATE TABLE nationality (
+	code_nationality serial,
+	description varchar(40),
+	CONSTRAINT "pk_nationality" PRIMARY KEY(code_nationality)
+)
+
+
+
+CREATE TABLE positions(
+	code_position serial,
+	description varchar(5),
+	CONSTRAINT "pk_positions" PRIMARY KEY(code_position)
+)
+
+
+CREATE TABLE position_player(
+	code_player integer,
+	code_position integer,
+	CONSTRAINT "pk_position_player" PRIMARY KEY(code_player, code_position),
+	CONSTRAINT "fk_position_player_1" FOREIGN KEY(code_player) REFERENCES players(id),
+	CONSTRAINT "fk_position_player_2" FOREIGN KEY(code_position) REFERENCES positions(code_position)
+)
+
+
+CREATE TABLE clubs(
+	code_club_team serial,
+	description varchar(40),
+	club_rating integer,
+	CONSTRAINT "pk_clubs" PRIMARY KEY(code_club_team)
+)
+
+
+ALTER TABLE players ADD CONSTRAINT "fk_players_1" FOREIGN KEY(code_club_team) REFERENCES clubs(code_club_team)
+
+
+CREATE TABLE national_team(
+	code_national_team serial,
+	description varchar(40),
+	national_rating integer,
+	CONSTRAINT "pk_national_team" PRIMARY KEY(code_national_team)
+)
+
+ALTER TABLE players ADD CONSTRAINT "fk_players_2" FOREIGN KEY(code_national_team) REFERENCES national_team(code_national_team)
+
+CREATE TABLE tags(
+	code_tag serial,
+	description varchar(80),
+	CONSTRAINT "pk_tags" PRIMARY KEY(code_tag)
+)
+
+
+CREATE TABLE player_tags(
+	code_player integer,
+	code_tag integer,
+	CONSTRAINT "pk_player_tags" PRIMARY KEY(code_player, code_tag),
+	CONSTRAINT "fk_player_tags_1" FOREIGN KEY(code_player) REFERENCES players(id),
+	CONSTRAINT "fk_player_tags_2" FOREIGN KEY(code_tag) REFERENCES tags(code_tag)
+)
+
+
+
+CREATE TABLE traits(
+	code_trait serial,
+	description varchar(80),
+	CONSTRAINT "pk_traits" PRIMARY KEY(code_trait)
+)
+
+
+CREATE TABLE player_traits(
+	code_player integer,
+	code_trait integer,
+	CONSTRAINT "pk_player_traits" PRIMARY KEY(code_player, code_trait),
+	CONSTRAINT "fk_player_traits_1" FOREIGN KEY(code_player) REFERENCES players(id),
+	CONSTRAINT "fk_player_traits_2" FOREIGN KEY(code_trait) REFERENCES traits(code_trait)
+)
+
+
+POPULANDO AS TABELAS 
+
+INSERT INTO clubs(description, club_rating)
+SELECT DISTINCT club_team, club_rating FROM jogadores
+	WHERE club_team IS NOT NULL;
+
+
+INSERT INTO national_team(description, national_rating)
+SELECT DISTINCT national_team, national_rating FROM jogadores
+	WHERE national_team IS NOT NULL;
+
+
+
+INSERT INTO nationality(description)
+SELECT DISTINCT nationality FROM jogadores
+	WHERE nationality IS NOT NULL;
+
+insert into players (id ,
+	name,
+	full_name,
+	birth_date,
+	age,
+	height_cm,
+	weight_kgs,
+	code_nationality,
+	overall_rating,
+	potential,
+	value_euro,
+	wage_euro,
+    preferred_foot,
+	international_reputation,
+	weak_foot,
+	skill_moves,
+	work_rate_defense,  
+	work_rate_attack,
+	body_type,
+	release_clause_euro,
+	code_club_team,
+	club_position,
+	club_jersey_number,
+	club_join_date,
+	contract_end_year,
+	code_national_team,
+	national_team_position,
+	national_jersey_number,
+	crossing,
+	finishing,
+	heading_accuracy,
+	short_passing,
+	volley,
+	dribbling,
+	curve,
+	freekick_accuracy,
+	long_passing,
+	ball_control,
+	acceleration,
+	sprint_speed,
+	agility,
+	reactions,
+	balance,
+	shot_power,
+	jumping,
+	stamina,
+	strength,
+	long_shots,
+	agression,
+	interceptation,
+	positioning,
+	vision,
+	penalties,
+	composure,
+	marking,
+	standing_tackle,
+	sliding_tackle,
+	gk_diving,
+	gk_handing,
+	gk_kiking,
+	gk_positioning,
+	gk_reflexes,
+	ls,
+	st,
+	rs,
+	lw,
+	lf,
+	cf,
+	rf,
+	rw,
+	lam,
+	cam,
+	ram,
+	lm,
+	lcm,
+	cm,
+	rcm,
+	rm,
+	lwb,
+	ldm,
+	cdm,
+	rdm,
+	rwb,
+	lb,
+	lcb,
+	cb,
+	rcb,
+	rb
+)
+	SELECT id ,
+	name,
+	full_name,
+	birth_date,
+	age,
+	height_cm,
+	weight_kgs,
+	code_nationality,
+	overall_rating,
+	potential,
+	value_euro,
+	wage_euro,
+    preferred_foot,
+	international_reputation,
+	weak_foot,
+	skill_moves,
+	trim(substring(work_rate from 1 for position ('/' in work_rate) - 1) ),
+	trim(substring(work_rate from position ('/' in work_rate) + 1 )), 
+	body_type,
+	release_clause_euro,
+	code_club_team,
+	club_position,
+	club_jersey_number,
+	club_join_date,
+	contract_end_year,
+	code_national_team,
+	national_team_position,
+	national_jersey_number,
+	crossing,
+	finishing,
+	heading_accuracy,
+	short_passing,
+	volley,
+	dribbling,
+	curve,
+	freekick_accuracy,
+	long_passing,
+	ball_control,
+	acceleration,
+	sprint_speed,
+	agility,
+	reactions,
+	balance,
+	shot_power,
+	jumping,
+	stamina,
+	strength,
+	long_shots,
+	agression,
+	interceptation,
+	positioning,
+	vision,
+	penalties,
+	composure,
+	marking,
+	standing_tackle,
+	sliding_tackle,
+	gk_diving,
+	gk_handing,
+	gk_kiking,
+	gk_positioning,
+	gk_reflexes,
+	ls,
+	st,
+	rs,
+	lw,
+	lf,
+	cf,
+	rf,
+	rw,
+	lam,
+	cam,
+	ram,
+	lm,
+	lcm,
+	cm,
+	rcm,
+	rm,
+	lwb,
+	ldm,
+	cdm,
+	rdm,
+	rwb,
+	lb,
+	lcb,
+	cb,
+	rcb,
+	rb FROM jogadores left JOIN nationality nations ON trim(jogadores.nationality) = trim(nations.description)
+	left JOIN clubs ON trim(jogadores.club_team) = trim(clubs.description)
+	left JOIN national_team ON trim(jogadores.national_team) = trim(national_team.description);
+
+
+CREATE OR REPLACE PROCEDURE carrega_positions()
+AS $$
+DECLARE
+code_jogador integer;
+desc_posicao varchar(25);
+novo_desc varchar(25);
+virgula integer;
+conta_posicao integer;
+code_posicao integer;
+conta_posicao_player integer;
+posicao CURSOR FOR SELECT id, positions FROM jogadores;
+BEGIN
+	OPEN posicao;
+	FETCH posicao INTO code_jogador, desc_posicao;
+	LOOP 
+		virgula:= position (',' in desc_posicao);
+		loop 
+			if virgula = 0 then
+				exit;
+			end if;
+			novo_desc:= substring (desc_posicao from 1 for virgula - 1);
+		    select count(*) into conta_posicao from positions where description = novo_desc;
+			if conta_posicao = 0 then
+					insert into positions (description) values (novo_desc);
+			end if;
+			select code_position into code_posicao from positions  where description = novo_desc;
+			insert into position_player (code_player,code_position) values (code_jogador,code_posicao);
+			desc_posicao := trim(substring (desc_posicao from virgula + 1 ));
+			virgula:= position (',' in desc_posicao);
+		end loop;
+		select count(*) into conta_posicao from positions where description = desc_posicao;
+		if conta_posicao = 0 then
+					insert into positions (description) values (desc_posicao);
+		end if;
+		select code_position into code_posicao from positions  where description = novo_desc;
+		select count(*) into conta_posicao_player from position_player where code_position = code_posicao
+				and code_player=code_jogador;
+	   if conta_posicao_player = 0 then
+			insert into position_player (code_player,code_position) values (code_jogador,code_posicao);
+		end if;
+		FETCH posicao INTO code_jogador, desc_posicao;
+		EXIT WHEN NOT FOUND;
+	END LOOP;
+CLOSE posicao;
+END; 
+$$ LANGUAGE plpgsql;
+
+CALL carrega_positions();
+
+
+CREATE OR REPLACE PROCEDURE carrega_traits()
+AS $$
+DECLARE
+code_jogador integer;
+desc_trait varchar(1000);
+novo_desc varchar(1000);
+virgula integer;
+conta_trait integer;
+code_skill integer;
+conta_trait_player integer;
+traits CURSOR FOR SELECT id, traits FROM jogadores
+	WHERE traits IS NOT NULL;
+BEGIN
+	OPEN traits;
+	FETCH traits INTO code_jogador, desc_trait;
+	LOOP 
+		virgula:= position (',' in desc_trait);
+		loop 
+			if virgula = 0 then
+				exit;
+			end if;
+			novo_desc:= substring (desc_trait from 1 for virgula - 1);
+		    select count(*) into conta_trait from traits where description = novo_desc;
+			if conta_trait = 0 then
+					insert into traits (description) values (novo_desc);
+			end if;
+			select code_trait into code_skill from traits  where description = novo_desc;
+			insert into player_traits (code_player,code_trait) values (code_jogador,code_skill);
+			desc_trait := trim(substring (desc_trait from virgula + 1 ));
+			virgula:= position (',' in desc_trait);
+		end loop;
+		select count(*) into conta_trait from traits where description = desc_trait;
+		if conta_trait = 0 then
+					insert into traits (description) values (desc_trait);
+		end if;
+		select code_trait into code_skill from traits  where description = novo_desc;
+		select count(*) into conta_trait_player from player_traits where code_trait = code_skill
+				and code_player=code_jogador;
+	   if conta_trait_player = 0 then
+			insert into player_traits (code_player,code_trait) values (code_jogador,code_skill);
+		end if;
+		FETCH traits INTO code_jogador, desc_trait;
+		EXIT WHEN NOT FOUND;
+	END LOOP;
+CLOSE traits;
+END; 
+$$ LANGUAGE plpgsql;
+
+
+CALL carrega_traits();
+
+
+CREATE OR REPLACE PROCEDURE carrega_tags()
+AS $$
+DECLARE
+code_jogador integer;
+desc_tag varchar(1000);
+novo_desc varchar(1000);
+virgula integer;
+conta_tag integer;
+code_tralha integer;
+conta_tag_player integer;
+tags CURSOR FOR SELECT id, tags FROM jogadores
+	WHERE tags IS NOT NULL;
+BEGIN
+	OPEN tags;
+	FETCH tags INTO code_jogador, desc_tag;
+	LOOP 
+		virgula:= position (',' in desc_tag);
+		loop 
+			if virgula = 0 then
+				exit;
+			end if;
+			novo_desc:= substring (desc_tag from 1 for virgula - 1);
+		    select count(*) into conta_tag from tags where description = novo_desc;
+			if conta_tag = 0 then
+					insert into tags (description) values (novo_desc);
+			end if;
+			select code_tag into code_tralha from tags  where description = novo_desc;
+			insert into player_tags (code_player,code_tag) values (code_jogador,code_tralha);
+			desc_tag := trim(substring (desc_tag from virgula + 1 ));
+			virgula:= position (',' in desc_tag);
+		end loop;
+		select count(*) into conta_tag from tags where description = desc_tag;
+		if conta_tag = 0 then
+					insert into tags (description) values (desc_tag);
+		end if;
+		select code_tag into code_tralha from tags  where description = novo_desc;
+		select count(*) into conta_tag_player from player_tags where code_tag = code_tralha
+				and code_player=code_jogador;
+	   if conta_tag_player = 0 then
+			insert into player_tags (code_player,code_tag) values (code_jogador,code_tralha);
+		end if;
+		FETCH tags INTO code_jogador, desc_tag;
+		EXIT WHEN NOT FOUND;
+	END LOOP;
+CLOSE tags;
+END; 
+$$ LANGUAGE plpgsql;
+
+
+CALL carrega_tags();
