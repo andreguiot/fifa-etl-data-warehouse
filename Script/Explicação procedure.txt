@@ -1,0 +1,2 @@
+                    Explicação das procedures
+As procedures usadas nos Scripts foram criadas para carregar os dados de tabelas que foram criadas a partir de campos multivalorados. As tabelas são traits, player_traits, positions, position_player, tags e player_tags.
