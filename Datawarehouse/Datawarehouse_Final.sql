@@ -45,6 +45,7 @@ CREATE TABLE ft_performance_nacional (
     code_national_team integer,
     code_age_group integer,
     code_position integer,
+    avg_sprint_speed float,
     avg_strength float,
     avg_vision float, 
     avg_positioning float,
