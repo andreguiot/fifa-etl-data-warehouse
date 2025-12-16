@@ -1,8 +1,8 @@
 # ⚽ FIFA Data Engineering Project: ETL & Data Warehouse
 
 Este repositório contém a implementação completa de um ambiente de
-Engenharia de Dados baseado no dataset do jogo FIFA. O projeto abrange
-desde a modelagem de banco de dados transacional, normalização, criação
+Engenharia de Dados baseado no dataset do jogo FIFA presente em : https://www.kaggle.com/datasets/shazad007/fifa-players-complete-stats/data. 
+O projeto abrange desde a modelagem de banco de dados transacional, normalização, criação
 de um Data Warehouse (OLAP), pipeline de ETL com Pentaho Data
 Integration (PDI) e automações via Triggers SQL.
 
